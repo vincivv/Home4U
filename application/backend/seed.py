@@ -2,7 +2,10 @@
 Seed script to populate initial data into the database.
 Run this script after starting the database to add default styles and tags.
 """
+import os
+
 from app.core.database import SessionLocal, init_db
+from app.core.settings import APP_ENV
 from app.models.database import Style, Tag, StyleTag, User
 from app.utils.auth import get_password_hash
 
@@ -56,6 +59,14 @@ TEST_USERS = [
     {"email": "demo@home4u.com", "password": "demo123"},
 ]
 
+
+def _should_seed_demo_users() -> bool:
+    raw = os.getenv("HOME4U_SEED_DEMO_USERS", "").strip().lower()
+    if raw:
+        return raw in {"1", "true", "yes", "on"}
+    return APP_ENV != "production"
+
+
 def seed_database():
     """Seed the database with initial data."""
     init_db()
@@ -63,18 +74,23 @@ def seed_database():
     db = SessionLocal()
     
     try:
-        # Create test users first
-        for user_data in TEST_USERS:
-            existing_user = db.query(User).filter(User.email == user_data["email"]).first()
-            if not existing_user:
-                hashed_password = get_password_hash(user_data["password"])
-                db_user = User(email=user_data["email"], password_hash=hashed_password)
-                db.add(db_user)
+        demo_users_created = 0
+        if _should_seed_demo_users():
+            for user_data in TEST_USERS:
+                existing_user = db.query(User).filter(User.email == user_data["email"]).first()
+                if not existing_user:
+                    hashed_password = get_password_hash(user_data["password"])
+                    db_user = User(email=user_data["email"], password_hash=hashed_password)
+                    db.add(db_user)
+                    demo_users_created += 1
         
         # Check if data already exists
         existing_styles = db.query(Style).count()
         if existing_styles > 0:
-            print(f"Database already has {existing_styles} styles and {len(TEST_USERS)} users. Skipping seed.")
+            print(
+                f"Database already has {existing_styles} styles. "
+                f"Created {demo_users_created} demo users."
+            )
             db.commit()
             return
         
@@ -107,7 +123,10 @@ def seed_database():
                 db.add(style_tag)
         
         db.commit()
-        print(f"Successfully seeded {len(TEST_USERS)} users, {len(STYLES)} styles and {len(tag_map)} tags!")
+        print(
+            f"Successfully seeded {len(STYLES)} styles and {len(tag_map)} tags. "
+            f"Created {demo_users_created} demo users."
+        )
         
     except Exception as e:
         print(f"Error seeding database: {e}")

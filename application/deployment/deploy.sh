@@ -3,11 +3,13 @@
 # Home4U AWS Deployment Setup Script
 # Run this on your EC2 instance as sudo
 
-set -e
+set -euo pipefail
 
 ENV_DIR="/etc/home4u"
 ENV_FILE="$ENV_DIR/home4u.env"
 APP_ROOT="${HOME4U_APP_ROOT:-/opt/home4u}"
+DEPLOY_USER="${HOME4U_DEPLOY_USER:-home4u}"
+UPLOAD_DIR="${HOME4U_UPLOAD_DIR:-/var/lib/home4u/uploads}"
 
 require_production_environment() {
   if ! sudo test -s "$ENV_FILE" || ! sudo grep -Eq '^[[:space:]]*HOME4U_SECRET_KEY=.+' "$ENV_FILE"; then
@@ -50,22 +52,32 @@ fi
 
 echo "=== Home4U Deployment Script ==="
 
+if [ "${EUID:-$(id -u)}" -ne 0 ]; then
+  echo "FATAL: run this script with sudo."
+  exit 1
+fi
+
 # Update and install dependencies
 echo "[1/8] Updating system..."
 apt-get update && apt-get upgrade -y
 
 # Install Python and pip (if not installed)
 echo "[2/8] Installing Python dependencies..."
-apt-get install -y python3 python3-pip python3-venv
+apt-get install -y ca-certificates curl git nginx python3 python3-pip python3-venv
 
 # Install Node.js (for building frontend)
 echo "[3/8] Installing Node.js..."
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-apt-get install -y nodejs nginx
+apt-get install -y nodejs
+
+if ! id -u "$DEPLOY_USER" >/dev/null 2>&1; then
+  useradd --system --create-home --shell /usr/sbin/nologin "$DEPLOY_USER"
+fi
 
 # Navigate to app directory
 cd "$APP_ROOT"
-mkdir -p "$ENV_DIR"
+mkdir -p "$ENV_DIR" "$UPLOAD_DIR"
+chown -R "$DEPLOY_USER:$DEPLOY_USER" "$UPLOAD_DIR"
 require_production_environment
 
 # Set up Python virtual environment for backend
@@ -167,7 +179,7 @@ systemctl enable nginx
 
 # Create systemd service for backend
 echo "[8/8] Creating systemd service for backend..."
-cp application/deployment/home4u-backend.service /etc/systemd/system/home4u-backend.service
+cp "$APP_ROOT/application/deployment/home4u-backend.service" /etc/systemd/system/home4u-backend.service
 
 # Enable and start backend service
 systemctl daemon-reload
@@ -185,7 +197,3 @@ else
   echo "Proxied API base is at http://$PUBLIC_DNS/api"
   echo "Health check is at http://$PUBLIC_DNS/health"
 fi
-echo ""
-echo "Test users:"
-echo "  - test@example.com / test123"
-echo "  - demo@home4u.com / demo123"
