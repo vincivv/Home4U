@@ -1,0 +1,368 @@
+/* ── Google Fonts — editorial display + restrained product UI ── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: var(--color-graphite-950);
+  --primary-hover: var(--color-graphite-800);
+  --secondary: var(--color-slate-400);
+  --secondary-light: var(--color-brass-300);
+  --danger: var(--color-danger-500);
+  --background: var(--color-bg-base);
+  --card-bg: var(--color-paper-50);
+  --text: var(--color-text-dark);
+  --text-secondary: var(--color-text-mid);
+  --border: rgb(var(--color-graphite-900-rgb) / 0.1);
+
+  --glass-bg:     rgb(var(--color-paper-50-rgb) / 0.72);
+  --glass-blur:   blur(20px);
+  --glass-border: 1px solid rgb(var(--color-graphite-900-rgb) / 0.08);
+  --glass-shadow: var(--shadow-glass-atmosphere);
+
+  --page-haze-warm: rgb(246 216 194 / 0.72);
+  --page-haze-cool: rgb(219 231 243 / 0.84);
+  --page-haze-sand: rgb(236 227 207 / 0.66);
+  --page-haze-ink: rgb(var(--color-graphite-950-rgb) / 0.06);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  background-color: #1a1714;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(circle at 12% 18%, var(--page-haze-warm) 0%, transparent 34%),
+    radial-gradient(circle at 86% 14%, var(--page-haze-cool) 0%, transparent 38%),
+    radial-gradient(circle at 52% 108%, var(--page-haze-sand) 0%, transparent 42%),
+    radial-gradient(circle at 48% -8%, var(--page-haze-ink) 0%, transparent 44%),
+    linear-gradient(180deg, rgb(var(--color-paper-50-rgb) / 0.96) 0%, var(--color-paper-0) 62%, var(--color-stone-100) 100%);
+  background-repeat: no-repeat;
+  background-size: 148% 148%, 152% 152%, 136% 136%, 120% 120%, 100% 100%;
+  background-position: 0% 0%, 100% 0%, 50% 100%, 50% 0%, 0 0;
+  animation: page-atmosphere var(--motion-drift) var(--ease-display) infinite alternate;
+  color: var(--text);
+  line-height: var(--leading-normal);
+  min-height: 100vh;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body[data-scene='login'],
+body[data-scene='dashboard'],
+body[data-scene='workspace'],
+body[data-scene='project'],
+body[data-scene='about'],
+body[data-scene='notfound'] {
+  background-color: #1a1714;
+  background-image: none;
+  animation: none;
+}
+
+@keyframes page-atmosphere {
+  0% {
+    background-position: 0% 0%, 100% 0%, 50% 100%, 50% 0%, 0 0;
+  }
+  100% {
+    background-position: 8% 4%, 94% 10%, 48% 96%, 52% 6%, 0 0;
+  }
+}
+
+/* Vertical rhythm — display serif vs UI sans */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--color-graphite-900);
+  letter-spacing: -0.025em;
+  line-height: var(--leading-tight);
+}
+
+h1 { font-size: var(--text-display);    font-weight: 400; }
+h2 { font-size: var(--text-display-sm); font-weight: 400; }
+h3 { font-size: var(--text-2xl);        font-weight: 400; }
+h4 { font-size: var(--text-xl);         font-weight: 500; }
+p {
+  line-height: var(--leading-relaxed);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.glass-morphism {
+  background: var(--glass-bg) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  border: var(--glass-border) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+.glass-depth {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: color-mix(in srgb, var(--color-paper-50) 78%, transparent);
+  border: 1px solid rgb(var(--color-graphite-900-rgb) / 0.08);
+  box-shadow: var(--shadow-elevated);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+  display: block;
+}
+
+::selection {
+  background: rgb(var(--color-accent-soft-rgb) / 0.35);
+  color: var(--color-primary-slate);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--motion-fast) ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  background-color: var(--primary);
+  color: var(--color-paper-50);
+  border: 1px solid rgb(var(--color-graphite-950-rgb) / 0.08);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform var(--motion-mid) var(--ease-standard),
+    box-shadow var(--motion-mid) var(--ease-standard),
+    background-color var(--motion-mid) ease,
+    border-color var(--motion-mid) ease,
+    color var(--motion-mid) ease;
+  box-shadow: var(--shadow-layer-1);
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-layer-2);
+}
+
+/* Magnetic nudge — transform driven by App.jsx pointer logic */
+button[data-magnetic-button] {
+  position: relative;
+  transition: transform 0.22s var(--ease-standard);
+  will-change: transform;
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background-color: var(--color-primary-300);
+  color: var(--text-secondary);
+  border-color: rgb(var(--color-graphite-900-rgb) / 0.08);
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 1;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+input,
+select,
+textarea {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  width: 100%;
+  margin-bottom: 1rem;
+  background: rgb(var(--color-paper-50-rgb) / 0.82);
+  color: var(--text);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    background-color var(--motion-fast) ease;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  border-color: rgb(var(--color-graphite-900-rgb) / 0.2);
+  box-shadow: var(--focus-ring);
+  background: var(--color-paper-50);
+}
+
+/* Auth Styles */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at 12% 22%, rgb(240 160 111 / 0.14) 0%, transparent 32%),
+    radial-gradient(circle at 88% 16%, rgb(var(--color-steel-500-rgb) / 0.48) 0%, transparent 38%),
+    linear-gradient(180deg, rgb(var(--color-paper-50-rgb) / 0.84), rgb(var(--color-paper-0-rgb) / 0.92));
+}
+
+.auth-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 2.5rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--glass-shadow);
+  width: 100%;
+  max-width: 400px;
+  border: var(--glass-border);
+}
+
+.auth-card h1 {
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  letter-spacing: -0.05em;
+}
+
+.auth-card h2 {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--color-primary-600);
+}
+
+.auth-card button[type="submit"] {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.875rem;
+}
+
+.toggle-auth {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.toggle-auth button {
+  background: none;
+  color: var(--primary);
+  padding: 0;
+  margin-left: 0.5rem;
+  box-shadow: none;
+  font-size: 0.9rem;
+}
+
+.toggle-auth button:hover {
+  text-decoration: underline;
+  transform: none;
+  box-shadow: none;
+}
+
+.error-message {
+  background-color: #fee2e2;
+  color: #b91c1c;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  border: 1px solid #fecaca;
+  font-size: 0.875rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Global Studio Spotlight Engine */
+.spotlight-engine {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9980;
+  background: radial-gradient(
+    600px circle at var(--cursor-x, 50vw) var(--cursor-y, 50vh),
+    rgba(255, 255, 255, 0.03),
+    transparent 40%
+  );
+  transition: background 0.4s ease;
+}
+
+/* Cinematic Dimming on Hover */
+body:has(.search-gallery-card:hover, .style-preview-card:hover, .recent-project-card:hover, .service-card:hover) .spotlight-engine {
+  background: radial-gradient(
+    800px circle at var(--cursor-x, 50vw) var(--cursor-y, 50vh),
+    rgba(255, 255, 255, 0.06),
+    rgb(var(--color-primary-slate-rgb) / 0.25) 75%
+  );
+}

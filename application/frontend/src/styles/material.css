@@ -1,0 +1,48 @@
+/* Subtle "material" interaction: 3D tilt + specular highlight (desktop, fine pointer). */
+
+[data-tilt] {
+  position: relative;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-tilt] {
+    transition: transform 140ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  }
+
+  [data-tilt].is-tilting {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transform:
+      perspective(900px)
+      rotateX(var(--tilt-rx, 0deg))
+      rotateY(var(--tilt-ry, 0deg))
+      translateY(-2px);
+  }
+
+  [data-tilt]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(
+        circle at var(--tilt-mx, 50%) var(--tilt-my, 50%),
+        rgba(255, 255, 255, 0.22),
+        transparent 58%
+      );
+    opacity: 0;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+  }
+
+  [data-tilt].is-tilting::after {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-tilt] {
+    transition: none !important;
+  }
+}

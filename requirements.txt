@@ -1,0 +1,5 @@
+# Home4U dependencies are managed per application layer.
+#
+# Backend:  application/backend/requirements.txt
+# Frontend: application/frontend/package.json
+

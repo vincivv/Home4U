@@ -1,0 +1,43 @@
+{
+  "name": "home4u-frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "VITE_API_BASE=/api vite build",
+    "test": "npm run test:hooks && npm run test:smoke",
+    "test:hooks": "node --test src/utils/styleContext.test.js",
+    "test:smoke": "vitest run src/App.smoke.test.jsx src/pages/Dashboard.a11y.test.jsx src/pages/Workspace.a11y.test.jsx src/pages/ProjectDetails.smoke.test.jsx",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "framer-motion": "^12.38.0",
+    "lucide-react": "^0.577.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^6.22.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "jsdom": "^29.0.2",
+    "vite": "^8.0.0-beta.13",
+    "vitest": "^4.1.4"
+  },
+  "overrides": {
+    "vite": "^8.0.0-beta.13"
+  }
+}

@@ -1,0 +1,211 @@
+:root {
+  /* ============================================================
+     HYBRID PALETTE — ink · graphite · mist · brass · paper
+     Marcelo influence: atmosphere, staging, negative space
+     Product influence: structure, clarity, disciplined hierarchy
+     ============================================================ */
+
+  /* Core palette — atmospheric haze around restrained product chrome */
+  --color-graphite-950: #07111c; /* deep studio ink */
+  --color-graphite-900: #0d1726; /* shell */
+  --color-graphite-800: #152339; /* raised dark surface */
+  --color-graphite-700: #203452; /* structured slate */
+  --color-steel-600: #91b4d4;    /* cool bloom */
+  --color-steel-500: #dee8f2;    /* mist haze */
+  --color-slate-400: #8ea3b9;    /* muted copy */
+  --color-slate-300: #b8c9d8;    /* light copy */
+  --color-brass-500: #8d7453;    /* aged brass shadow */
+  --color-brass-400: #c8ae89;    /* aged brass */
+  --color-brass-300: #e7dac7;    /* sand haze */
+  --color-stone-200: #dbe3ea;    /* frosted surface */
+  --color-stone-100: #eef3f6;    /* lifted surface */
+  --color-paper-50:  #ffffff;    /* paper */
+  --color-paper-0:   #f7f8f6;    /* base field */
+  --color-success-600: #3f6f5a;
+  --color-danger-500:  #dc2626;
+
+  /* RGB channel triples */
+  --color-graphite-950-rgb: 7 17 28;
+  --color-graphite-900-rgb: 13 23 38;
+  --color-graphite-800-rgb: 21 35 57;
+  --color-graphite-700-rgb: 32 52 82;
+  --color-steel-600-rgb: 145 180 212;
+  --color-steel-500-rgb: 222 232 242;
+  --color-slate-400-rgb: 142 163 185;
+  --color-slate-300-rgb: 184 201 216;
+  --color-brass-500-rgb: 141 116 83;
+  --color-brass-400-rgb: 200 174 137;
+  --color-brass-300-rgb: 231 218 199;
+  --color-stone-200-rgb: 219 227 234;
+  --color-stone-100-rgb: 238 243 246;
+  --color-paper-50-rgb: 255 255 255;
+  --color-paper-0-rgb: 247 248 246;
+  --color-success-600-rgb: 63 111 90;
+  --color-danger-500-rgb: 220 38 38;
+
+  /* ── Semantic roles ────────────────────────────────────────── */
+
+  /* Backgrounds */
+  --color-bg-deep:        var(--color-graphite-950);
+  --color-bg-base:        var(--color-paper-0);
+  --color-bg-raised:      var(--color-stone-100);
+  --color-bg-overlay:     var(--color-paper-50);
+  --color-bg-light:       var(--color-stone-100);
+  --color-bg-paper:       var(--color-paper-50);
+
+  --color-bg-deep-rgb:    var(--color-graphite-950-rgb);
+  --color-bg-base-rgb:    var(--color-paper-0-rgb);
+  --color-bg-raised-rgb:  var(--color-stone-100-rgb);
+
+  /* Text */
+  --color-text-primary:   var(--color-paper-50);
+  --color-text-secondary: var(--color-stone-200);
+  --color-text-tertiary:  var(--color-slate-300);
+  --color-text-dark:      var(--color-graphite-900);
+  --color-text-mid:       var(--color-slate-400);
+
+  --color-text-primary-rgb:   var(--color-paper-50-rgb);
+  --color-text-secondary-rgb: var(--color-stone-200-rgb);
+
+  /* Accent — reserved for material emphasis rather than the whole shell */
+  --color-accent:         var(--color-brass-400);
+  --color-accent-strong:  var(--color-brass-500);
+  --color-accent-subtle:  var(--color-brass-300);
+  --color-accent-rgb:     var(--color-brass-400-rgb);
+  --color-accent-strong-rgb: var(--color-brass-500-rgb);
+
+  /* Shared studio shell palette for the protected app */
+  --color-studio-bg-start:     var(--color-graphite-950);
+  --color-studio-bg-end:       var(--color-graphite-900);
+  --color-studio-surface:      rgb(var(--color-graphite-900-rgb) / 0.82);
+  --color-studio-surface-soft: rgb(var(--color-graphite-800-rgb) / 0.76);
+  --color-studio-surface-strong: rgb(var(--color-graphite-700-rgb) / 0.9);
+  --color-studio-border:       rgb(var(--color-steel-500-rgb) / 0.14);
+  --color-studio-border-strong: rgb(var(--color-steel-500-rgb) / 0.24);
+  --color-studio-text:         var(--color-paper-50);
+  --color-studio-muted:        rgb(var(--color-steel-500-rgb) / 0.86);
+  --color-studio-soft:         var(--color-steel-500);
+  --color-studio-glow:         var(--color-steel-600);
+  --color-studio-glow-rgb:     var(--color-steel-600-rgb);
+  --color-studio-warm:         var(--color-brass-300);
+  --color-studio-warm-strong:  var(--color-brass-400);
+  --color-studio-warm-rgb:     var(--color-brass-400-rgb);
+
+  /* Borders */
+  --color-border:         rgb(var(--color-graphite-900-rgb) / 0.08);
+  --color-border-mid:     rgb(var(--color-graphite-900-rgb) / 0.12);
+  --color-border-strong:  rgb(var(--color-graphite-900-rgb) / 0.22);
+  --color-border-light:   rgb(var(--color-paper-50-rgb) / 0.18);
+
+  /* ── Legacy aliases (keep existing components compiling) ───── */
+  --color-primary-slate:         var(--color-graphite-900);
+  --color-primary-slate-rgb:     var(--color-graphite-900-rgb);
+  --color-secondary-arctic:      var(--color-paper-50);
+  --color-secondary-arctic-rgb:  var(--color-paper-50-rgb);
+  --color-action-emerald:        var(--color-success-600);
+  --color-action-emerald-rgb:    var(--color-success-600-rgb);
+  --color-camel-400:             var(--color-brass-400);
+  --color-camel-400-rgb:         var(--color-brass-400-rgb);
+  --color-wine-900:              var(--color-graphite-800);
+  --color-wine-900-rgb:          var(--color-graphite-800-rgb);
+  --color-chocolate-700:         var(--color-graphite-700);
+  --color-chocolate-700-rgb:     var(--color-graphite-700-rgb);
+  --color-coffee-900:            var(--color-graphite-950);
+  --color-coffee-900-rgb:        var(--color-graphite-950-rgb);
+  --color-apricot-100:           var(--color-paper-50);
+  --color-apricot-100-rgb:       var(--color-paper-50-rgb);
+  --color-accent-soft:           var(--color-steel-500);
+  --color-accent-soft-rgb:       var(--color-steel-500-rgb);
+  --color-limestone-100:         var(--color-stone-100);
+  --color-limestone-200:         var(--color-stone-200);
+  --color-stone-300:             var(--color-stone-200);
+  --color-stone-300-rgb:         var(--color-stone-200-rgb);
+  --color-slate-500:             var(--color-slate-400);
+  --color-ink-900:               var(--color-graphite-950);
+  --color-ink-900-rgb:           var(--color-graphite-950-rgb);
+
+  --color-brand-400: var(--color-brass-300);
+  --color-brand-500: var(--color-brass-400);
+  --color-brand-600: var(--color-graphite-900);
+  --color-brand-700: var(--color-graphite-950);
+
+  --color-primary-200: var(--color-paper-50);
+  --color-primary-300: var(--color-stone-200);
+  --color-primary-400: var(--color-brass-400);
+  --color-primary-500: var(--color-steel-600);
+  --color-primary-600: var(--color-graphite-800);
+  --color-primary-700: var(--color-graphite-900);
+
+  --color-bg-950:       var(--color-paper-0);
+  --color-surface-900:  var(--color-paper-50);
+  --color-surface-850:  var(--color-stone-200);
+  --color-border-700:   rgb(var(--color-graphite-900-rgb) / 0.24);
+  --color-text-100:     var(--color-graphite-900);
+  --color-text-200:     var(--color-graphite-900);
+  --color-text-300:     var(--color-slate-400);
+  --color-text-400:     var(--color-slate-300);
+  --color-text-50:      var(--color-paper-50);
+
+  /* ── Typography ────────────────────────────────────────────── */
+  /* Display type stays editorial; UI type stays disciplined */
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-serif:   var(--font-display);
+
+  /* Type scale */
+  --text-xs:      0.75rem;
+  --text-sm:      0.875rem;
+  --text-base:    1rem;
+  --text-md:      1.125rem;
+  --text-lg:      1.25rem;
+  --text-xl:      1.5625rem;
+  --text-2xl:     1.953125rem;
+  --text-3xl:     2.44140625rem;
+  --text-display: clamp(2.8rem, 6vw, 5.5rem);
+  --text-display-sm: clamp(2rem, 4vw, 3.5rem);
+
+  --leading-tight:   1.1;
+  --leading-snug:    1.25;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.65;
+
+  /* ── Shadows ────────────────────────────────────────────────── */
+  --shadow-layer-1: 0 12px 24px -20px rgb(var(--color-graphite-950-rgb) / 0.18);
+  --shadow-layer-2: 0 20px 44px -28px rgb(var(--color-graphite-950-rgb) / 0.2);
+  --shadow-layer-3: 0 26px 58px -34px rgb(var(--color-graphite-950-rgb) / 0.26);
+  --shadow-layer-4: 0 40px 84px -48px rgb(var(--color-graphite-950-rgb) / 0.3);
+  --shadow-elevated: var(--shadow-layer-1), var(--shadow-layer-2), var(--shadow-layer-3);
+
+  --shadow-glass-atmosphere:
+    0 1px 0 rgba(255, 255, 255, 0.62) inset,
+    0 -1px 0 rgb(var(--color-graphite-950-rgb) / 0.06) inset,
+    0 26px 54px -38px rgb(var(--color-graphite-950-rgb) / 0.28),
+    0 8px 18px -16px rgb(var(--color-graphite-950-rgb) / 0.18);
+
+  --focus-ring:        0 0 0 3px rgb(var(--color-brass-400-rgb) / 0.26);
+  --focus-ring-strong: 0 0 0 4px rgb(var(--color-brass-400-rgb) / 0.34);
+
+  /* ── Spacing (4px / 8px grid) ────────────────────────────── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-8:  48px;
+  --space-12: 64px;
+
+  /* ── Radius ────────────────────────────────────────────────── */
+  --radius-sm: 5px;
+  --radius-md: 10px;
+  --radius-lg: 18px;
+
+  /* ── Motion ────────────────────────────────────────────────── */
+  --motion-fast: 180ms;
+  --motion-mid:  320ms;
+  --motion-slow: 560ms;
+  --motion-drift: 14s;
+  --motion-float: 7s;
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-display: cubic-bezier(0.16, 1, 0.3, 1);
+}

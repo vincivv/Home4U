@@ -1,0 +1,478 @@
+/* ============================================================
+   LOGIN — studio route alignment
+   Full-bleed editorial. Brand on the left, form on the right.
+   Atmosphere: midnight navy + cool bloom. Type: large, serif-led.
+   ============================================================ */
+
+/* Google Font for the display serif (Cormorant Garamond) is loaded via index.html or index.css */
+
+.auth-split-layout {
+  /* Local palette tokens */
+  --auth-deep: #201c18;
+  --auth-surface: rgb(42 36 31 / 0.96);
+  --auth-glass: rgb(49 43 38 / 0.86);
+  --auth-border: rgb(255 255 255 / 0.12);
+  --auth-border-mid: rgb(255 255 255 / 0.18);
+  --auth-text: #f2eeea;
+  --auth-muted: #a79d95;
+  --auth-accent: #ece6e1;
+  --auth-accent-strong: #f2eeea;
+  --auth-accent-subtle: #c2b7ae;
+
+  display: flex;
+  min-height: 100dvh;
+  width: 100%;
+  background:
+    radial-gradient(circle at 16% 14%, rgb(85 72 62 / 0.18), transparent 30%),
+    radial-gradient(circle at 84% 20%, rgb(120 102 89 / 0.08), transparent 28%),
+    linear-gradient(180deg, #2a241f 0%, var(--auth-deep) 42%, #181411 100%);
+  overflow: hidden;
+  font-family: var(--font-sans);
+  position: relative;
+}
+
+/* ── Atmospheric grain layer ─────────────────────────────── */
+.auth-split-layout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ────────────────────────────────────────────────────────────
+   LEFT — Cinematic hero (Marcelo)
+   ─────────────────────────────────────────────────────────── */
+.auth-hero {
+  flex: 1 1 55%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(2.5rem, 5vw, 5rem);
+  color: var(--auth-text);
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ── Background image — full opacity, no blur (Marcelo: image leads) ── */
+.auth-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 18%, rgb(var(--color-studio-glow-rgb) / 0.28), transparent 28%),
+    radial-gradient(circle at 82% 24%, rgb(var(--color-studio-warm-rgb) / 0.08), transparent 24%),
+    linear-gradient(
+      170deg,
+      rgb(6 12 22 / 0.8) 0%,
+      rgb(8 17 31 / 0.32) 38%,
+      rgb(7 14 24 / 0.68) 100%
+    ),
+    url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=90&w=2400')
+      center / cover no-repeat;
+  z-index: 0;
+  /* NO blur — the photo should breathe */
+  transition: transform 18s ease-out;
+}
+
+.auth-hero:hover::before {
+  transform: scale(1.025);
+}
+
+/* Vertical brass stripe — brand presence mark */
+.auth-hero::after {
+  content: '';
+  position: absolute;
+  left: clamp(2.5rem, 5vw, 5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 40%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--auth-accent),
+    transparent
+  );
+  opacity: 0.55;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.auth-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo mark — small, uppercase, spaced */
+.auth-logo {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--auth-text);
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.auth-logo svg {
+  color: var(--auth-accent);
+  flex-shrink: 0;
+}
+
+/* Editorial headline — Marcelo level: enormous, weight-400, italic brass */
+.auth-quote {
+  max-width: 700px;
+  padding-left: 0;
+}
+
+.auth-quote h2 {
+  font-family: var(--font-display);
+  font-size: clamp(4.5rem, 10vw, 11rem);  /* BIG — editorial dominance */
+  line-height: 0.92;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: var(--auth-text);
+}
+
+.auth-quote h2 em {
+  font-style: italic;
+  color: var(--auth-accent);
+  display: block;
+}
+
+/* Description hidden on desktop — Marcelo: let the image speak */
+.auth-quote p {
+  display: none;
+}
+
+/* Show on mobile where space allows a breather */
+@media (max-width: 900px) {
+  .auth-quote p {
+    display: block;
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+    color: var(--auth-muted);
+    line-height: var(--leading-relaxed);
+    max-width: 40ch;
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Attribution footer inside hero */
+.auth-hero-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth-hero-footer-line {
+  width: 24px;
+  height: 1px;
+  background: var(--auth-accent);
+  opacity: 0.5;
+}
+
+.auth-hero-footer-text {
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--auth-muted);
+  opacity: 1;
+}
+
+/* ────────────────────────────────────────────────────────────
+   RIGHT — Form panel (Adrien: structured, minimal, narrow)
+   ─────────────────────────────────────────────────────────── */
+.auth-form-container {
+  flex: 0 0 clamp(320px, 32vw, 420px);  /* Narrower — form is lean */
+  background: var(--auth-surface);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 3.5vw, 3.5rem);
+  position: relative;
+  z-index: 2;
+  border-left: 1px solid var(--auth-border);
+  box-shadow: -28px 0 56px rgb(20 16 13 / 0.38);
+}
+
+/* Subtle top separator line */
+.auth-form-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--auth-accent), transparent);
+  opacity: 0.25;
+}
+
+.auth-form-header {
+  margin-bottom: 2.5rem;
+}
+
+.auth-form-header h3 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.4vw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--auth-text);
+  margin-bottom: 0.5rem;
+  line-height: 1.15;
+}
+
+.auth-form-header p {
+  color: var(--auth-muted);
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+/* ── Form structure ───────────────────────────────────────── */
+.modern-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Floating label fields */
+.input-floating {
+  position: relative;
+  display: block;
+  width: 100%;
+  cursor: text;
+}
+
+.input-floating input {
+  width: 100%;
+  min-height: 64px;
+  background: rgb(47 41 36 / 0.84);
+  border: 1px solid var(--auth-border);
+  border-radius: 0;
+  padding: 1.15rem 1rem 0.55rem;
+  color: var(--auth-text);
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  transition: border-color var(--motion-fast) ease,
+              background var(--motion-fast) ease,
+              box-shadow var(--motion-fast) ease;
+  letter-spacing: 0.01em;
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  z-index: 0;
+}
+
+.input-floating input:focus {
+  background: rgb(53 46 40 / 0.94);
+  border-color: var(--auth-accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgb(236 230 225 / 0.12);
+}
+
+.input-floating-label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--auth-muted);
+  font-size: 0.875rem;
+  font-weight: 300;
+  transition: all var(--motion-fast) ease;
+  letter-spacing: 0.02em;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.input-floating input:focus ~ .input-floating-label,
+.input-floating input:not(:placeholder-shown) ~ .input-floating-label {
+  top: 0.42rem;
+  transform: translateY(0);
+  font-size: 0.67rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--auth-accent-subtle);
+}
+
+/* CTA button */
+.btn-cinematic {
+  width: 100%;
+  min-height: 54px;
+  background: var(--auth-accent);
+  color: #1f1a17;
+  border: none;
+  border-radius: 0;
+  padding: 0.95rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: background var(--motion-fast) ease,
+              transform var(--motion-fast) ease,
+              box-shadow var(--motion-mid) ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 12px 26px -14px rgb(236 230 225 / 0.2);
+  touch-action: manipulation;
+  position: relative;
+  z-index: 1;
+}
+
+.btn-cinematic:hover:not(:disabled) {
+  background: #f4efeb;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 34px -18px rgb(236 230 225 / 0.24);
+}
+
+.btn-cinematic:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-cinematic:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Spinner on loading state */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spin { animation: spin 0.8s linear infinite; }
+
+/* ── Secondary actions ──────────────────────────────────────── */
+.auth-switch {
+  margin-top: 1.75rem;
+  text-align: center;
+  color: var(--auth-muted);
+  font-size: 0.82rem;
+  font-weight: 300;
+}
+
+.auth-switch button {
+  background: none;
+  border: none;
+  color: var(--auth-accent);
+  font-weight: 600;
+  font-size: inherit;
+  margin-left: 0.4rem;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--motion-fast) ease;
+  letter-spacing: 0.02em;
+}
+
+.auth-switch button:hover {
+  color: var(--auth-accent-subtle);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.auth-exploration {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+.auth-exploration button {
+  background: none;
+  border: none;
+  color: var(--auth-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: color var(--motion-fast) ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.auth-exploration button:hover {
+  color: var(--auth-text);
+}
+
+/* ── Error state ──────────────────────────────────────────── */
+.error-message {
+  margin-bottom: 1.25rem;
+  background: rgb(122 42 42 / 0.18);
+  color: #f1c0c0;
+  padding: 0.75rem 1rem;
+  border-radius: 0;
+  border: 1px solid rgb(193 98 98 / 0.26);
+  font-size: 0.83rem;
+  line-height: 1.5;
+}
+
+/* ── Divider line between panels ─────────────────────────── */
+.auth-divider {
+  height: 1px;
+  background: var(--auth-border);
+  margin: 1.5rem 0;
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .auth-split-layout {
+    flex-direction: column;
+  }
+
+  .auth-hero {
+    flex: 0 0 auto;
+    min-height: 46dvh;
+    padding: 2.5rem 2rem;
+  }
+
+  /* Hide the vertical stripe on mobile */
+  .auth-hero::after {
+    display: none;
+  }
+
+  .auth-quote {
+    padding-left: 0;
+  }
+
+  .auth-quote h2 {
+    font-size: clamp(2.2rem, 7vw, 3rem);
+  }
+
+  .auth-quote p {
+    display: none;
+  }
+
+  .auth-form-container {
+    flex: 1;
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--auth-border);
+    box-shadow: 0 -24px 48px rgb(var(--color-graphite-950-rgb) / 0.45);
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-hero {
+    min-height: 36dvh;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .auth-quote h2 {
+    font-size: clamp(1.8rem, 9vw, 2.4rem);
+  }
+
+  .auth-form-container {
+    padding: 2rem 1.5rem;
+  }
+}

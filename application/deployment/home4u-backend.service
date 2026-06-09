@@ -1,0 +1,18 @@
+[Unit]
+Description=Home4U FastAPI Backend
+After=network.target
+
+[Service]
+Type=simple
+User=home4u
+Group=home4u
+WorkingDirectory=/opt/home4u/application/backend
+EnvironmentFile=-/etc/home4u/home4u.env
+Environment="PATH=/opt/home4u/application/backend/.venv/bin"
+Environment="HOME4U_ENV=production"
+ExecStart=/opt/home4u/application/backend/.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
