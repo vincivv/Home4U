@@ -4,6 +4,12 @@ Home4U is a full-stack interior design planning app for renters and first-time a
 
 The project is built as a production-style web application with a React frontend, FastAPI backend, PostgreSQL persistence, authentication, file uploads, schema migrations, automated smoke tests, and deployment assets for an AWS/Linux environment.
 
+## Live Deployment
+
+Home4U is currently deployed on AWS:
+
+[http://ec2-54-80-251-73.compute-1.amazonaws.com/](http://ec2-54-80-251-73.compute-1.amazonaws.com/)
+
 ## Product Overview
 
 Home4U is designed around a real user workflow:
